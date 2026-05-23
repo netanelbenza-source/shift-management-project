@@ -1,10 +1,13 @@
 [
     {
         "id": 12345,
-        "name": "ggggg"
-    },
-    {
-        "id": 12345,
-        "name": "rrr"
+        "name": "aaaa",
+        "duties": [
+            {
+                "name": "hhhh",
+                "day": "sunday",
+                "status": "pending"
+            }
+        ]
     }
 ]

@@ -63,7 +63,7 @@ def handle_view_soldiers() -> None:
     למה הפונקציה קיימת:
     הפרדה בין קבלת הנתונים לבין הצגתם.
     """
-    pass
+    print(solder.get_all_soldiers())
 
 
 def handle_add_duty() -> None:
@@ -77,8 +77,18 @@ def handle_add_duty() -> None:
     למה הפונקציה קיימת:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
-    pass
-
+    stoper = True
+    while stoper:
+        try :
+            id_solder = int(input("please enter the id solder "))
+        except ValueError :
+            print("the id solder it is a variable of type int ")
+        else:
+            stoper = False
+    the_duty = input("Enter the name of duty : ")        
+    day = input("Enter the day of the dowries : ")
+    duty_manager.add_duty_to_soldier(id_solder,the_duty,day)
+    print("Adding benefits has been successfully updated")
 
 def handle_update_duty_status() -> None:
     """

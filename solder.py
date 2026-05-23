@@ -4,15 +4,15 @@ import utils
 
 
 def add_soldier(soldier_id: int, name: str) -> None:
-        is_find = utils.find_soldier_by_id
-        if not is_find:
+        is_find = utils.find_soldier_by_id(soldier_id)
+        if is_find:
             raise ValueError ("The soldier is already registered")
         is_good_name = utils.is_valid_name(name)
         if not is_good_name:
               raise ValueError ("The value name is ereor")
-        with open(r"C:\X\e\hanged_man\project1\__pycache__\data.json","w",encoding="utf-8") as file :
-            data_json.the_data_of_solder.append({"id": soldier_id , "name":name})
-            json.dump(data_json.the_data_of_solder,file ,indent=4, ensure_ascii=False)
+        with open(r"C:\X\e\hanged_man\project1\__pycache__\data.json","w",encoding = "utf-8") as file :
+            data_json.the_data_of_solder.append({"id": soldier_id , "name":name ,"duties": []})
+            json.dump(data_json.the_data_of_solder,file ,indent = 4, ensure_ascii = False)
    
    
      
@@ -54,8 +54,6 @@ def remove_soldier(soldier_id: int) -> None:
 
 def get_all_soldiers() -> list:
 
-    with open(r"C:\X\e\hanged_man\project1\__pycache__\data.json","r" ,encoding="utf-8") as file:
-        return json.load(file)
     """
     מחזירה את רשימת כל החיילים במערכת.
     
@@ -73,5 +71,5 @@ def get_all_soldiers() -> list:
     גישה לנתונים בצורה מבוקרת.
     מאפשר לקבל את הנתונים מבלי לגשת ישירות למשתנה הגלובלי.
     """
-    pass
+    return data_json.the_data_of_solder
 

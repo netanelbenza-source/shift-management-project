@@ -2,12 +2,6 @@ import data_json
 
 
 def find_soldier_by_id(soldier_id: int) -> dict | None:
-    to_add = True
-    for dict in data_json.the_data_of_solder:
-        if dict.get("id") == soldier_id :
-            return dict
-        return None
-     
     """
     מחפשת חייל לפי id ומחזירה אותו.
     
@@ -27,7 +21,12 @@ def find_soldier_by_id(soldier_id: int) -> dict | None:
     יש פונקציה אחת שעושה את זה.
     מחזירה None במקום לזרוק exception - מאפשרת גמישות.
     """
-    pass
+    to_add = True
+    for dict in data_json.the_data_of_solder:
+        if dict.get("id") == soldier_id :
+            return dict
+        return None
+     
 
 
 def find_duty_by_name(duties: list, duty_name: str) -> dict | None:
@@ -50,7 +49,14 @@ def find_duty_by_name(duties: list, duty_name: str) -> dict | None:
     הפרדה של לוגיקת החיפוש למקום אחד.
     מחזירה None במקום לזרוק exception - מאפשרת גמישות.
     """
-    pass
+    for dict in list:
+        if dict["name"] == duty_name :
+                return dict
+    return None
+
+    
+
+
 
 
 def is_valid_status(status: str) -> bool:
@@ -74,7 +80,10 @@ def is_valid_status(status: str) -> bool:
     גם מקל על שינוי הסטטוסים החוקיים בעתיד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    pass
+    listi = ["pending","completed","missed"]
+    if status in listi:
+        return True
+    return False
 
 
 def is_valid_name(name: str) -> bool:
@@ -98,9 +107,9 @@ def is_valid_name(name: str) -> bool:
     בעתיד אפשר להוסיף בדיקות נוספות (אורך מינימלי, תווים חוקיים).
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    if not name.isalpha:
-           return False
-    return True
+    if  name.isalpha():
+           return True
+    return False
     
 
 
@@ -125,7 +134,13 @@ def soldier_has_duty(soldier: dict, duty_name: str) -> bool:
     הפרדה של הלוגיקה למקום אחד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    pass
+    for val in soldier.values():
+        if type(val) is list:
+            for dict in val:
+                if dict.gat("name") == duty_name :
+                    return True
+                return False
+
 
 
 def is_valid_day(day: str) -> bool:
@@ -149,4 +164,8 @@ def is_valid_day(day: str) -> bool:
     בעתיד אפשר לשנות את הימים החוקיים במקום אחד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    pass
+    listi = ["sunday" ,"monday", "tuesday","wednesday", "thursda" ]
+    if day in listi:
+        return True
+    return False
+                
