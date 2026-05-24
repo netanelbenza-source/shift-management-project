@@ -49,7 +49,7 @@ def find_duty_by_name(duties: list, duty_name: str) -> dict | None:
     הפרדה של לוגיקת החיפוש למקום אחד.
     מחזירה None במקום לזרוק exception - מאפשרת גמישות.
     """
-    for dict in list:
+    for dict in duties:
         if dict["name"] == duty_name :
                 return dict
     return None

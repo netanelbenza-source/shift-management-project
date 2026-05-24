@@ -1,19 +1,16 @@
-import data_json,solder,duty_manager,utils
-
-
+import solder,duty_manager
 
 
 def show_menu() -> None:
 
-    print("to add_solder enter 1")
-    print("to remuve solder enter 2")
-    print("to view solder enter 3")
-    print("to add buty enter 4")
-    print("to update_duty_status enter 5")
-    print("to view_soldier_duties enter 6")
-    print("to exit enter 7")
+    print("To add_solder enter 1")
+    print("To remuve solder enter 2")
+    print("To view solder enter 3")
+    print("To add buty enter 4")
+    print("To update_duty_status enter 5")
+    print("To view_soldier_duties enter 6")
+    print("To exit enter 7")
     print("please enret your choice ")
-
 
 
 def get_user_choice() -> str:
@@ -37,7 +34,6 @@ def handle_add_soldier() -> None:
     solder.add_soldier(id_solder,name_of_solder) 
     print("The soldier was added successfully\n")       
     
-
 
 def handle_remove_soldier() -> None:
     stoper = True
@@ -86,9 +82,10 @@ def handle_add_duty() -> None:
         else:
             stoper = False
     the_duty = input("Enter the name of duty : ")        
-    day = input("Enter the day of the dowries : ")
+    day = input("Enter the day of the dowries : ").lower()
     duty_manager.add_duty_to_soldier(id_solder,the_duty,day)
     print("Adding benefits has been successfully updated")
+
 
 def handle_update_duty_status() -> None:
     """
@@ -101,7 +98,18 @@ def handle_update_duty_status() -> None:
     למה הפונקציה קיימת:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
-    pass
+    stoper = True
+    while stoper:
+        try :
+            id_solder = int(input("please enter the id solder "))
+        except ValueError :
+            print("the id solder it is a variable of type int ")
+        else:
+            stoper = False
+    the_duty = input("Enter the name of duty : ").lower()
+    update_status = input("Please enter the status : ").lower()
+    duty_manager.update_duty_status(id_solder,the_duty,update_status)
+    print("The status has been successfully updated")
 
 
 def handle_view_soldier_duties() -> None:
@@ -115,13 +123,16 @@ def handle_view_soldier_duties() -> None:
     למה הפונקציה קיימת:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
-    pass
-
-
-
-
-
-
+    stoper = True
+    while stoper:
+        try :
+            id_solder = int(input("please enter the id solder "))
+        except ValueError :
+            print("the id solder it is a variable of type int ")
+        else:
+            stoper = False
+    print(duty_manager.get_soldier_duties(id_solder) )       
+    
 
 def main():
      exit = True
@@ -131,14 +142,19 @@ def main():
             match choice:
                 case "1" :
                     handle_add_soldier()
+                    exit = False
                 case "2" :
                     handle_remove_soldier()
+                    exit = False
                 case "3" :
                     handle_view_soldiers()
+                    exit = False
                 case "4" :
                     handle_add_duty()
+                    exit = False
                 case "5" :
                     handle_update_duty_status()
+                    exit = False
                 case "6" :
                     handle_view_soldier_duties()
                 case "7":

@@ -1,4 +1,4 @@
-import solder , data_json , utils,json
+import  data_json , utils,json
 
 
 
@@ -28,7 +28,7 @@ def add_duty_to_soldier(soldier_id: int, duty_name: str, day: str) -> None:
     זורקת exceptions במקרה של שגיאה במקום להחזיר False.
     """
     is_find_soldeir = utils.find_soldier_by_id(soldier_id)
-    if not is_find_soldeir:
+    if is_find_soldeir == None:
         raise KeyError("The soldier's id was not found")
     
     has_a_duty = utils.soldier_has_duty(is_find_soldeir,duty_name)
@@ -36,7 +36,7 @@ def add_duty_to_soldier(soldier_id: int, duty_name: str, day: str) -> None:
          raise ValueError("The soldier is already on duty")
     
     is_valid_day = utils.is_valid_day(day)   
-    if not is_valid_day:
+    if is_valid_day == False:
          raise ValueError("There are no shifts these days")
     
     new_dict = {"name" : duty_name , "day" : day, "status" : "pending"}
@@ -70,11 +70,20 @@ def update_duty_status(soldier_id: int, duty_name: str, new_status: str) -> None
     מבצעת בדיקות ומעדכנת את הסטטוס.
     זורקת exceptions במקרה של שגיאה במקום להחזיר False.
     """
-    # is_find_soldeir = utils.find_duty_by_name(soldier_id)
-    # if not is_find_soldeir:
-    #     raise KeyError("The soldier's id was not found")
+    is_find_soldeir = utils.find_soldier_by_id(soldier_id)
+    if not is_find_soldeir:
+         raise KeyError("The soldier's id was not found")
+    is_find_duty = utils.find_duty_by_name(is_find_soldeir["duties"],duty_name)
+    if is_find_duty == None:
+         raise KeyError("This duty is not performed by this soldier")
+    is_valid_status = utils.is_valid_status(new_status)
+    if is_valid_status == False:
+         raise ValueError("Invalid status name")
+    is_find_duty["status"] = new_status
+    with open(r"C:\X\e\hanged_man\project1\__pycache__\data.json","w",encoding = "utf-8") as file :
+        json.dump(data_json.the_data_of_solder,file,indent = 4, ensure_ascii = False)
     
-    pass
+     
 
 
 def get_soldier_duties(soldier_id: int) -> list:
@@ -99,7 +108,7 @@ def get_soldier_duties(soldier_id: int) -> list:
     זורקת exception אם החייל לא קיים (במקום להחזיר רשימה ריקה).
     """
     is_find = utils.find_soldier_by_id(soldier_id)
-    if not is_find:
+    if is_find == None:
             raise KeyError("The soldier is already registered")
     return is_find.get("duties")
 
