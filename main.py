@@ -31,8 +31,11 @@ def handle_add_soldier() -> None:
         else:
             stoper = False
     name_of_solder = input("please enter the name of solder ")
-    solder.add_soldier(id_solder,name_of_solder) 
-    print("The soldier was added successfully\n")       
+    try:
+        solder.add_soldier(id_solder,name_of_solder) 
+        print("The soldier was added successfully\n")
+    except ValueError as e:
+        print(f"ereor :{e}\n")       
     
 
 def handle_remove_soldier() -> None:
@@ -44,8 +47,11 @@ def handle_remove_soldier() -> None:
             print("the id solder it is a variable of type int ")
         else:
             stoper = False
-    solder.remove_soldier(id_solder)        
-    print("The soldier was remove successfully\n") 
+    try:        
+        solder.remove_soldier(id_solder)        
+        print("The soldier was remove successfully\n")
+    except KeyError as e:
+         print(f"ereor :{e}\n")  
 
 
 def handle_view_soldiers() -> None:
@@ -83,8 +89,13 @@ def handle_add_duty() -> None:
             stoper = False
     the_duty = input("Enter the name of duty : ")        
     day = input("Enter the day of the dowries : ").lower()
-    duty_manager.add_duty_to_soldier(id_solder,the_duty,day)
-    print("Adding benefits has been successfully updated")
+    try:
+        duty_manager.add_duty_to_soldier(id_solder,the_duty,day)
+        print("Adding benefits has been successfully updated")
+    except ValueError as e:
+        print(f"ereor :{e}\n")      
+    except KeyError as e:
+         print(f"ereor :{e}\n")   
 
 
 def handle_update_duty_status() -> None:
@@ -108,8 +119,13 @@ def handle_update_duty_status() -> None:
             stoper = False
     the_duty = input("Enter the name of duty : ").lower()
     update_status = input("Please enter the status : ").lower()
-    duty_manager.update_duty_status(id_solder,the_duty,update_status)
-    print("The status has been successfully updated")
+    try:
+        duty_manager.update_duty_status(id_solder,the_duty,update_status)
+        print("The status has been successfully updated \n")
+    except KeyError as e:
+          print(f"ereor :{e}\n")
+    except ValueError as e:
+          print(f"ereor :{e}\n")         
 
 
 def handle_view_soldier_duties() -> None:
@@ -131,7 +147,10 @@ def handle_view_soldier_duties() -> None:
             print("the id solder it is a variable of type int ")
         else:
             stoper = False
-    print(duty_manager.get_soldier_duties(id_solder) )       
+    try:       
+        print(duty_manager.get_soldier_duties(id_solder) )
+    except KeyError as e:
+          print(f"ereor :{e}\n")              
     
 
 def main():
@@ -142,19 +161,14 @@ def main():
             match choice:
                 case "1" :
                     handle_add_soldier()
-                    exit = False
                 case "2" :
                     handle_remove_soldier()
-                    exit = False
                 case "3" :
                     handle_view_soldiers()
-                    exit = False
                 case "4" :
                     handle_add_duty()
-                    exit = False
                 case "5" :
                     handle_update_duty_status()
-                    exit = False
                 case "6" :
                     handle_view_soldier_duties()
                 case "7":

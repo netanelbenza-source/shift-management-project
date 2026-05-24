@@ -5,10 +5,10 @@ import utils
 
 def add_soldier(soldier_id: int, name: str) -> None:
         is_find = utils.find_soldier_by_id(soldier_id)
-        if is_find:
+        if not is_find :
             raise ValueError ("The soldier is already registered")
         is_good_name = utils.is_valid_name(name)
-        if not is_good_name:
+        if is_good_name == False:
               raise ValueError ("The value name is ereor")
         with open(r"C:\X\e\hanged_man\project1\__pycache__\data.json","w",encoding = "utf-8") as file :
             data_json.the_data_of_solder.append({"id": soldier_id , "name":name ,"duties": []})

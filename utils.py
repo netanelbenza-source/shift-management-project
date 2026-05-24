@@ -21,11 +21,10 @@ def find_soldier_by_id(soldier_id: int) -> dict | None:
     יש פונקציה אחת שעושה את זה.
     מחזירה None במקום לזרוק exception - מאפשרת גמישות.
     """
-    to_add = True
     for dict in data_json.the_data_of_solder:
-        if dict.get("id") == soldier_id :
+        if dict["id"] == soldier_id :
             return dict
-        return None
+    return None
      
 
 
@@ -107,7 +106,7 @@ def is_valid_name(name: str) -> bool:
     בעתיד אפשר להוסיף בדיקות נוספות (אורך מינימלי, תווים חוקיים).
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    if  name.isalpha():
+    if  len(name.strip())>0 :
            return True
     return False
     
@@ -134,12 +133,10 @@ def soldier_has_duty(soldier: dict, duty_name: str) -> bool:
     הפרדה של הלוגיקה למקום אחד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    for val in soldier.values():
-        if type(val) is list:
-            for dict in val:
-                if dict.gat("name") == duty_name :
+    for dict in soldier.get("duties"):
+       if dict["name"] == duty_name :
                     return True
-                return False
+    return False
 
 
 
@@ -164,7 +161,7 @@ def is_valid_day(day: str) -> bool:
     בעתיד אפשר לשנות את הימים החוקיים במקום אחד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    listi = ["sunday" ,"monday", "tuesday","wednesday", "thursda" ]
+    listi = ["sunday" ,"monday", "tuesday","wednesday", "thursday" ]
     if day in listi:
         return True
     return False
